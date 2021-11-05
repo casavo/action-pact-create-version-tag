@@ -1,0 +1,24 @@
+name: Pact - Create Version Tag
+description: Tell pact broker to create a version tag for specific environment
+inputs:
+  pacticipant:
+    description: The pacticipant name, i.e. consumer name
+    required: true
+  version:
+    description: The pacticipant version
+    required: true
+  tag:
+    description: Tag name for pacticipant version.
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - broker
+    - create-version-tag
+    - --pacticipant
+    - ${{ inputs.pacticipant }}
+    - --version
+    - ${{ inputs.version }}
+    - --tag
+    - ${{ inputs.tag }}
